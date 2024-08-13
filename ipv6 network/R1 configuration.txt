@@ -1,0 +1,110 @@
+R1#sh run
+Building configuration...
+
+Current configuration : 1298 bytes
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname R1
+!
+!
+!
+!
+!
+!
+!
+!
+ip cef
+ipv6 unicast-routing
+!
+no ipv6 cef
+!
+ipv6 dhcp pool VLAN100_POOL
+ address prefix 2001:0DB8:FBC0:100::20/64 lifetime 172800 86400
+ dns-server 2001:4860:4860::8888
+ domain-name company.com
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:FBC0:3::1/64
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/0/1
+ no ip address
+ duplex auto
+ speed auto
+ ipv6 address 2001:DB8:FBC0:4::1/64
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/0/1.100
+ encapsulation dot1Q 100
+ no ip address
+ ipv6 address 2001:DB8:FBC0:100::1/64
+ ipv6 nd other-config-flag
+ ipv6 ospf 1 area 0
+ ipv6 dhcp server VLAN100_POOL
+!
+interface GigabitEthernet0/0/1.200
+ encapsulation dot1Q 200
+ no ip address
+ ipv6 address 2001:DB8:FBC0:200::1/64
+ ipv6 ospf 1 area 0
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+ shutdown
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ipv6 router ospf 1
+ router-id 1.1.1.1
+ log-adjacency-changes
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+

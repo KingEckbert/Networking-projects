@@ -1,0 +1,105 @@
+Building configuration...
+
+Current configuration : 1297 bytes
+!
+version 15.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname IT
+!
+!
+!
+enable secret 5 $1$mERr$4jptIO3HaNUIfN8UYCN5O0
+!
+!
+!
+!
+!
+!
+ip cef
+ipv6 unicast-routing
+!
+no ipv6 cef
+!
+!
+!
+username admin secret 5 $1$mERr$s/shreF9Jv4do0IJevVSH/
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain-name company.com
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0/0
+ ip address 172.16.4.1 255.255.255.248
+ ip helper-address 172.16.4.10
+ ip access-group 101 in
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/1
+ ip address 172.16.4.11 255.255.255.248
+ ip helper-address 172.16.4.10
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/0/2
+ no ip address
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 1.1.1.5
+ log-adjacency-changes
+ network 172.16.4.0 0.0.0.7 area 0
+ network 172.16.4.8 0.0.0.7 area 1
+!
+ipv6 router ospf 1
+ log-adjacency-changes
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+access-list 101 deny ip 172.16.1.0 0.0.0.15 any
+access-list 101 deny ip 172.16.5.0 0.0.0.3 any
+ip access-list extended dhcp_permit
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login local
+ transport input ssh
+line vty 5 15
+ login
+ transport input none
+!
+!
+ntp server 172.16.4.10
+!
+end

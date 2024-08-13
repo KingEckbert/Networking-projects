@@ -1,0 +1,173 @@
+Current configuration : 2591 bytes
+!
+version 16.3.2
+service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname H1
+!
+logging userinfo
+login on-success
+!
+enable secret 5 $1$mERr$vXY67e96NwENltVWIshnL/
+!
+!
+!
+!
+!
+!
+no ip cef
+ip routing
+!
+no ipv6 cef
+!
+!
+!
+username admin secret 5 $1$mERr$vXY67e96NwENltVWIshnL/
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+ip domain-name company.com
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet1/0/1
+ no switchport
+ ip address 192.168.0.10 255.255.255.248
+ ip helper-address 145.50.76.1
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/2
+ no switchport
+ ip address 192.168.0.18 255.255.255.248
+ ip helper-address 145.50.76.1
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/3
+ no switchport
+ ip address 192.168.0.58 255.255.255.248
+ ip helper-address 145.50.76.1
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/4
+ no switchport
+ ip address 192.168.0.42 255.255.255.248
+ ip helper-address 145.50.76.1
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/5
+ no switchport
+ ip address 192.168.0.2 255.255.255.248
+ ip helper-address 145.50.76.1
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/6
+ no switchport
+ ip address 192.168.100.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet1/0/7
+!
+interface GigabitEthernet1/0/8
+!
+interface GigabitEthernet1/0/9
+!
+interface GigabitEthernet1/0/10
+!
+interface GigabitEthernet1/0/11
+!
+interface GigabitEthernet1/0/12
+!
+interface GigabitEthernet1/0/13
+!
+interface GigabitEthernet1/0/14
+!
+interface GigabitEthernet1/0/15
+!
+interface GigabitEthernet1/0/16
+!
+interface GigabitEthernet1/0/17
+!
+interface GigabitEthernet1/0/18
+!
+interface GigabitEthernet1/0/19
+!
+interface GigabitEthernet1/0/20
+!
+interface GigabitEthernet1/0/21
+!
+interface GigabitEthernet1/0/22
+!
+interface GigabitEthernet1/0/23
+!
+interface GigabitEthernet1/0/24
+!
+interface GigabitEthernet1/1/1
+!
+interface GigabitEthernet1/1/2
+!
+interface GigabitEthernet1/1/3
+!
+interface GigabitEthernet1/1/4
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+router ospf 1
+ router-id 10.10.10.10
+ log-adjacency-changes
+ network 192.168.0.0 0.0.0.7 area 0
+ network 192.168.100.0 0.0.0.3 area 0
+ network 192.168.0.8 0.0.0.7 area 1
+ network 192.168.0.16 0.0.0.7 area 2
+ network 192.168.0.56 0.0.0.7 area 3
+ network 192.168.0.40 0.0.0.7 area 4
+ network 192.168.0.48 0.0.0.7 area 4
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+logging trap debugging
+logging 145.50.76.1
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ logging synchronous
+ login local
+ transport input ssh
+!
+!
+!
+ntp server 145.50.76.1
+!
+end
